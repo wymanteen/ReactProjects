@@ -1,0 +1,22 @@
+{
+  "name": "typescript-react-project",
+  "version": "1.0.0",
+  "description": "My 1st typescript react app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "magic": "webpack"
+  },
+  "author": "Teen Man",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "ajv": "^6.12.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.82.1",
+    "webpack-cli": "^5.1.1"
+  }
+}
