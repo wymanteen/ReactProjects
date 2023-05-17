@@ -4,7 +4,7 @@ import {ReferenceLoginContext} from "./ReferenceLoginContext"
 
 const Login = () =>{
 
-    const { setAuthenticated }  = useContext(ReferenceLoginContext);
+    const { authenticated, setAuthenticated }  = useContext(ReferenceLoginContext);
 
     const handleLogin = () => setAuthenticated(true);
     const handleLogout = () => setAuthenticated(false);
@@ -13,6 +13,7 @@ const Login = () =>{
     return (
         <div>
             <h1>Login Component</h1>
+            is authenticated = {authenticated?'Y':'N'}
             <button onClick={handleLogin}>Login</button>
             <button onClick={handleLogout}>Logout</button>          
         </div>
