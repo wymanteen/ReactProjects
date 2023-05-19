@@ -16,6 +16,8 @@ npm run magic
 ### Reference
 https://blog.logrocket.com/how-use-typescript-react-tutorial-examples/
 
+  https://ajv.js.org/guide/getting-started.html
+
 </details>
 
 
