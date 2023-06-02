@@ -6,7 +6,7 @@
         "date": "September 14, 2016",
         "uri": "",
         "desc": "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
-        "status": 0
+        "status": 1
     },
     {
         "id": 2,
@@ -15,7 +15,7 @@
         "date": "September 14, 2016",
         "uri": "",
         "desc": "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
-        "status": 0
+        "status": 1
     },
     {
         "id": 3,
@@ -24,7 +24,7 @@
         "date": "September 14, 2016",
         "uri": "",
         "desc": "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
-        "status": 2
+        "status": 0
     },
     {
         "id": 4,
@@ -33,6 +33,6 @@
         "date": "September 14, 2016",
         "uri": "",
         "desc": "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
-        "status": 2
+        "status": 0
     }
 ]
