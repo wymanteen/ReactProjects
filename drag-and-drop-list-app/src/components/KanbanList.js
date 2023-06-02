@@ -1,11 +1,12 @@
-import React, { useCallback, useState, useRef, useContext } from 'react';
+import React, { useCallback, useState, useRef, useContext, useEffect } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from './ItemTypes.js';
 import Card from './Card.js';
 import update from 'immutability-helper';
 import cardsData from '../data/cards.json';
 import { ContentCutOutlined } from '@mui/icons-material';
-import {ReferenceListContext} from "./ReferenceListContext";
+import {ReferenceAllCardsContext} from "./ReferenceAllCardsContext";
+
 
 function getStyle(backgroundColor) {
     return {
@@ -25,51 +26,37 @@ function getStyle(backgroundColor) {
 
 export default function KanbanList({ list }){
 
-    const { listsUpdated, setListsUpdated }  = useContext(ReferenceListContext);
-    const [cards, setCards] = useState(cardsData);
+    //const { listsUpdated, setListsUpdated }  = useContext(ReferenceListContext);
+    //const [allCards, setAllCards] = useState(cardsData);
+    const { allCards, setAllCards }  = useContext(ReferenceAllCardsContext);
 
+    const [cards, setCards] = useState(cardsData.filter(x => x.status == list.id));
+
+    useEffect(() => {
+      //Runs on the first render
+      //And any time any dependency value changes
+      if(allCards.length>0)
+        setCards(allCards.filter(x => x.status == list.id));
+        
+    }, [allCards]);
+    
     const ref = useRef(null);
-
-    //const [hasDropped, setHasDropped] = useState(false);
-    //const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false);
 
     const [{ isOver, isOverCurrent }, drop] = useDrop(
       () => ({
-        accept: ItemTypes.CARD,
+        accept: list.active ? ItemTypes.CARD: ItemTypes.NTH,
         collect: (monitor) => ({
           isOver: monitor.isOver(),
           isOverCurrent: monitor.isOver({ shallow: true }),
         }),
-        hover(item, monitor) {
-/*
-            const cardId = item.id;
-            const currentLisId = item.status;
-            const hoverListId = ref.current.id;
-
-            //console.log(item);
-
-            if (!ref.current) {
-                return
-            }
-
-            if(currentLisId!=hoverListId){
-              //update status value
-
-              let newArr = [...cards]; // copying the old datas array
-              var foundIndex = newArr.findIndex(x => x.id == cardId);
-              var foundItem = newArr[foundIndex];
-              foundItem.status = hoverListId;
-              setCards(newArr);
-
-            }
-            */
-        },
         drop: (item, monitor) => {
             const cardId = item.id;
             const currentLisId = item.status;
             const hoverListId = ref.current.id;
 
             //console.log(item);
+            //console.log("currentLisId=" + currentLisId);
+            //console.log("hoverListId=" + hoverListId);
 
             if (!ref.current) {
                 return
@@ -78,12 +65,14 @@ export default function KanbanList({ list }){
             if(currentLisId!=hoverListId){
               //update status value
 
-              let newArr = [...cards]; // copying the old datas array
+              //let newArr = [...cards]; // copying the old datas array
+
+              let newArr = [...allCards];
               var foundIndex = newArr.findIndex(x => x.id == cardId);
               var foundItem = newArr[foundIndex];
               foundItem.status = hoverListId;
-              setCards(newArr);
-              setListsUpdated(new Date());
+              setAllCards(newArr);
+              //setListsUpdated(new Date());
 
             }
         },
@@ -91,7 +80,7 @@ export default function KanbanList({ list }){
      []
     )
 
-    let backgroundColor = 'lightgrey'
+    let backgroundColor = list.active ? 'lightgrey' : 'grey';
     
     if (isOverCurrent || (isOver)) {
       backgroundColor = 'lightyellow'
@@ -99,10 +88,7 @@ export default function KanbanList({ list }){
 
     drop(ref);  
 
-
     const renderCards = useCallback((cards) => {
-        //cards && console.log(cards);
-
         var html = cards.map((card, i)=> <Card
                                             key={card.id}
                                             index={i}
@@ -135,9 +121,9 @@ export default function KanbanList({ list }){
         
         {list.listName}
         <br />
-        {/*hasDropped && <span> {hasDroppedOnChild && ' on child'}</span>*/}
-  
-        {renderCards(cards.filter(x => x.status == list.id))};
+        {/*renderCards(cards.filter(x => x.status == list.id))*/};
+
+        {renderCards(cards)};
         
       </div>
     )

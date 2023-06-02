@@ -1,8 +1,7 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState, useCallback } from 'react';
 import { useDrag, useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes.js'
 import Book from './Book.js';
-import {ReferenceListContext} from "./ReferenceListContext";
 
 const style = {
   //border: '1px dashed gray',
@@ -12,8 +11,6 @@ const style = {
 }
 
 export default function Card({ id, title, author, date, uri, desc, index, status, moveCard}){
-
-  const { listsUpdated, setListsUpdated }  = useContext(ReferenceListContext);
 
   const ref = useRef(null);
 
@@ -26,12 +23,17 @@ export default function Card({ id, title, author, date, uri, desc, index, status
       }
     },
     hover(item, monitor) {
+      //console.log(item);
       if (!ref.current) {
         return
       }
 
       const dragIndex = item.index
       const hoverIndex = index
+
+      console.log("dragIndex=" + dragIndex);
+      console.log("hoverIndex=" + hoverIndex);
+
       // Don't replace items with themselves
       if (dragIndex === hoverIndex) {
         return
@@ -62,14 +64,12 @@ export default function Card({ id, title, author, date, uri, desc, index, status
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance
       // to avoid expensive index searches.
-      //item.index = hoverIndex
+      item.index = hoverIndex
 
-      setListsUpdated(new Date());
     },
   }),
   []
- )
-  
+ ) 
 
   const [{ opacity }, drag] = useDrag({
     type: ItemTypes.CARD,
@@ -83,7 +83,6 @@ export default function Card({ id, title, author, date, uri, desc, index, status
 
   drag(drop(ref));
 
-  
   return (
     <div ref={ref} style={{ ...style, opacity }} data-handler-id={handlerId}>
       {/*
