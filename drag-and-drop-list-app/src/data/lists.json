@@ -1,0 +1,22 @@
+[
+    {
+        "id": 0,
+        "listName" : "To-Read",
+        "active": true
+    },
+    {
+        "id": 1,
+        "listName" : "Reading...",
+        "active": true
+    },
+    {
+        "id": 2,
+        "listName" : "Done",
+        "active": true
+    },
+    {
+        "id": 3,
+        "listName" : "Have Interest",
+        "active": false
+    }
+]
