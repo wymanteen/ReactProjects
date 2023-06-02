@@ -1,7 +1,6 @@
 import React, { useRef, useContext, useState, useCallback } from 'react';
 import { useDrag, useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes.js'
-import Book from './Book.js';
 
 const style = {
   //border: '1px dashed gray',
@@ -85,15 +84,7 @@ export default function Card({ id, title, author, date, uri, desc, index, status
 
   return (
     <div ref={ref} style={{ ...style, opacity }} data-handler-id={handlerId}>
-      <Book 
-        id={id} 
-        title={title} 
-        author={author}
-        date={date}
-        uri={uri}
-        desc={desc}
-        index={index}
-      />
+      {title} 
     </div>
   )
 }
