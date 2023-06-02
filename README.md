@@ -46,8 +46,6 @@ https://www.developerway.com/posts/how-to-use-memo-use-callback
 * **React Hook** ```useContext```
 * **React DnD** 
 
-Still have some bugs!!!
-
 <details> 
 
 ### Reference
