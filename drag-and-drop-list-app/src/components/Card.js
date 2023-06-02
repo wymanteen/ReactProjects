@@ -85,7 +85,6 @@ export default function Card({ id, title, author, date, uri, desc, index, status
 
   return (
     <div ref={ref} style={{ ...style, opacity }} data-handler-id={handlerId}>
-      {/*
       <Book 
         id={id} 
         title={title} 
@@ -95,8 +94,6 @@ export default function Card({ id, title, author, date, uri, desc, index, status
         desc={desc}
         index={index}
       />
-      */}
-      {title}
     </div>
   )
 }

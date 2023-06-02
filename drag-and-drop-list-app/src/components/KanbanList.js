@@ -12,7 +12,7 @@ function getStyle(backgroundColor) {
     return {
       border: '1px solid rgba(0,0,0,0.2)',
       minHeight: '8rem',
-      minWidth: '8rem',
+      minWidth: '360px',
       backgroundColor,
       padding: '1rem',
       paddingTop: '1rem',
@@ -26,8 +26,6 @@ function getStyle(backgroundColor) {
 
 export default function KanbanList({ list }){
 
-    //const { listsUpdated, setListsUpdated }  = useContext(ReferenceListContext);
-    //const [allCards, setAllCards] = useState(cardsData);
     const { allCards, setAllCards }  = useContext(ReferenceAllCardsContext);
 
     const [cards, setCards] = useState(cardsData.filter(x => x.status == list.id));
@@ -64,15 +62,11 @@ export default function KanbanList({ list }){
 
             if(currentLisId!=hoverListId){
               //update status value
-
-              //let newArr = [...cards]; // copying the old datas array
-
               let newArr = [...allCards];
               var foundIndex = newArr.findIndex(x => x.id == cardId);
               var foundItem = newArr[foundIndex];
               foundItem.status = hoverListId;
               setAllCards(newArr);
-              //setListsUpdated(new Date());
 
             }
         },
@@ -121,8 +115,6 @@ export default function KanbanList({ list }){
         
         {list.listName}
         <br />
-        {/*renderCards(cards.filter(x => x.status == list.id))*/};
-
         {renderCards(cards)};
         
       </div>
