@@ -1,4 +1,7 @@
 # React Projects
+## graphql-app (pending)
+* **GraphQL**
+
 ## typescript-react-project  
 > Example of object type validation
 * **React** + **TypeScript** + **Webpack**
